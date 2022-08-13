@@ -13,7 +13,7 @@ document.documentElement.setAttribute('data-theme', theme.value)
 provide('setTheme', setTheme)
 
 watch(
-  () => theme.value,
+   => theme.value,
   (current) => {
     document.documentElement.setAttribute('data-theme', current)
     localStorage.setItem('theme', current)
