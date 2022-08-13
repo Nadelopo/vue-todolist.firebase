@@ -10,9 +10,7 @@ import Header from '@/components/Header'
 const theme = ref(localStorage.getItem('theme') || 'dark')
 const setTheme = (value) => (theme.value = value)
 document.documentElement.setAttribute('data-theme', theme.value)
-
 provide('setTheme', setTheme)
-
 watch(
   () => theme.value,
   (current) => {
@@ -129,4 +127,11 @@ html[data-theme='purple']
   --color: #fff
   --shadow-hover: 0 0 8px 3px #76179f
   --shadow-focus: 0 0 8px 3px #8823b3
+
+html[data-theme='orange']
+  --back-main: #a15500
+  --back-second: #b76100
+  --color: #fff
+  --shadow-hover: 0 0 8px 3px #a55d0b
+  --shadow-focus: 0 0 8px 3px #914d00
 </style>

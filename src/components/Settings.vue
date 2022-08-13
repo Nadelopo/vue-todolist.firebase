@@ -36,6 +36,7 @@
               <div @click="setTheme('light')" class="li">светлая</div>
               <div @click="setTheme('turquoise')" class="li">бирюзовый</div>
               <div @click="setTheme('purple')" class="li">фиолетовый</div>
+              <div @click="setTheme('orange')" class="li">ораньжевый</div>
             </Accordion>
           </div>
         </div>
@@ -50,7 +51,7 @@ import { onClickOutside } from '@vueuse/core'
 import Accordion from './UI/Accordion.vue'
 
 const props = defineProps(['setOpenSettings'])
-console.log(1)
+
 const visible = ref(false)
 const setTheme = inject('setTheme')
 
