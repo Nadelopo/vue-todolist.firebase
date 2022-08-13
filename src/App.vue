@@ -1,0 +1,132 @@
+<template>
+  <Header />
+  <router-view />
+</template>
+
+<script setup>
+import { watch, ref, provide } from 'vue'
+import Header from '@/components/Header'
+
+const theme = ref(localStorage.getItem('theme') || 'dark')
+const setTheme = (value) => (theme.value = value)
+document.documentElement.setAttribute('data-theme', theme.value)
+
+provide('setTheme', setTheme)
+
+watch(
+  () => theme.value,
+  (current) => {
+    document.documentElement.setAttribute('data-theme', current)
+    localStorage.setItem('theme', current)
+  }
+)
+
+const open = ref(false)
+const setOpen = (value) => (open.value = value)
+provide('open', open)
+provide('setOpen', setOpen)
+</script>
+
+<style lang="sass">
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+*
+  box-sizing: border-box
+  font-family: Roboto
+  transition: background-color 200ms linear
+
+:root
+
+body
+  background: var(--back-main)
+  color: var(--color)
+  -webkit-tap-highlight-color: transparent
+
+input
+  background: var(--back-main)
+  border: none
+  outline: none
+  color: var(--color)
+  border-radius: 8px
+  width: 100%
+  padding: 3px 10px
+  transition: .4s
+  &::placeholder
+    color: var(--color)
+  &:hover
+    box-shadow: var(--shadow-hover)
+  &:focus
+    box-shadow: var(--shadow-focus)
+
+.wrapper
+  border-radius: 8px
+  padding: 20px
+  background: var(--back-second)
+  margin: 0 auto 30px auto
+
+
+.d-flex
+  display: flex
+
+.container
+  width: 100%
+  max-width: 550px
+  margin: 0 auto
+  padding: 0 8px
+
+.mbtn, .cbtn
+  font-family: Roboto
+  font-size: 16px
+  cursor: pointer
+  border-radius: 10px
+  outline: none
+  color: var(--color)
+  background: var(--back-main)
+  padding: 2px 6px 1px 6px
+  transition: .4s
+  border: 2px solid var(--back-main)
+  width: 100%
+  &:hover
+    color: var(--color)
+    background: var(--back-second)
+  &.active
+    background: var(--back-main)
+
+
+.cbtn
+  border: 2px solid var(--back-second)
+  background: var(--back-second)
+  &:hover
+    background: var(--back-main)
+
+html[data-theme='dark']
+  --back-main: #1c1c1c
+  --back-second: #303030
+  --color: #fff
+  --shadow-hover: 0 0 8px 3px #464646
+  --shadow-focus: 0 0 8px 3px #565656
+
+
+html[data-theme='light']
+  --back-main: #f1f1f1
+  --back-second: #fff
+  --color: #000
+  --shadow-hover: 0 0 8px 3px #c1c1c1
+  --shadow-focus: 0 0 8px 3px #979797
+
+html[data-theme='turquoise']
+  --back-main: #097487
+  --back-second: #028C9E
+  --color: #fff
+  --shadow-hover: 0 0 8px 3px #10a4bd
+  --shadow-focus: 0 0 8px 3px #14b3cf
+
+html[data-theme='purple']
+  --back-main: #510b81
+  --back-second: #610689
+  --color: #fff
+  --shadow-hover: 0 0 8px 3px #76179f
+  --shadow-focus: 0 0 8px 3px #8823b3
+</style>
