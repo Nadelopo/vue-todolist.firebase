@@ -11,9 +11,8 @@ const theme = ref(localStorage.getItem('theme') || 'dark')
 const setTheme = (value) => (theme.value = value)
 document.documentElement.setAttribute('data-theme', theme.value)
 provide('setTheme', setTheme)
-
 watch(
-   => theme.value,
+  () => theme.value,
   (current) => {
     document.documentElement.setAttribute('data-theme', current)
     localStorage.setItem('theme', current)
