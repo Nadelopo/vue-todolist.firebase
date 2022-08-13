@@ -106,7 +106,6 @@ html[data-theme='dark']
   --shadow-hover: 0 0 8px 3px #464646
   --shadow-focus: 0 0 8px 3px #565656
 
-
 html[data-theme='light']
   --back-main: #f1f1f1
   --back-second: #fff
