@@ -50,7 +50,7 @@ import { onClickOutside } from '@vueuse/core'
 import Accordion from './UI/Accordion.vue'
 
 const props = defineProps(['setOpenSettings'])
-
+console.log(1)
 const visible = ref(false)
 const setTheme = inject('setTheme')
 
