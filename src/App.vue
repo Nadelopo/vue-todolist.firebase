@@ -8,6 +8,7 @@ import { watch, ref, provide } from 'vue'
 import Header from '@/components/Header'
 
 const theme = ref(localStorage.getItem('theme') || 'dark')
+
 const setTheme = (value) => (theme.value = value)
 document.documentElement.setAttribute('data-theme', theme.value)
 provide('setTheme', setTheme)
