@@ -121,8 +121,8 @@ html[data-theme='light']
   --shadow-focus: 0 0 8px 3px #979797
 
 html[data-theme='turquoise']
-  --back-main: #097487
-  --back-second: #028C9E
+  --back-main: #07889f
+  --back-second: #069baf
   --color: #fff
   --shadow-hover: 0 0 8px 3px #10a4bd
   --shadow-focus: 0 0 8px 3px #14b3cf

@@ -36,7 +36,7 @@ import Popup from '../UI/Popup.vue'
 import { updateCategory, getUser } from '@/firebase'
 import Swal from 'sweetalert2'
 
-const { getCurrentUserId } = useLoadUsers()
+const { getCurrentUserId, updateUserData } = useLoadUsers()
 
 const userId = ref('')
 const user = ref()
@@ -66,6 +66,7 @@ const editCategory = async () => {
     Swal.fire('Данные изменены', '', 'success')
     updateCategory(userId.value, changeCategories.value)
     user.value = await getUser(userId.value)
+    updateUserData()
   } else {
     if (!newCategory.value) {
       Swal.fire('Заполните данные', '', 'warning')
@@ -78,6 +79,7 @@ const editCategory = async () => {
       changeCategories.value = user.value.category
       newCategory.value = ''
       openInput.value = false
+      updateUserData()
     }
   }
 }

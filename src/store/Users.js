@@ -21,8 +21,11 @@ export const useLoadUsers = defineStore('users', {
   },
   actions: {
     async getCurrentUserId() {
-      const userId = await firebase.getCurrentUser()
-      return userId.uid
+      const user = await firebase.getCurrentUser()
+      return user.uid
+    },
+    async updateUserData() {
+      this.user = await getUser((await firebase.getCurrentUser()).uid)
     },
   },
 })
