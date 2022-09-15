@@ -43,7 +43,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { db } from '@/firebase'

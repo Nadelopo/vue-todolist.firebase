@@ -34,17 +34,17 @@
 </template>
 
 <script setup>
-import firebase from 'firebase'
+import 'firebase/auth'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
-import Settings from '@/components/Settings'
+import Settings from '@/components/Settings.vue'
 import { ref, inject } from 'vue'
-import '@/firebase'
+import { firebaseApp } from '@/firebase'
 
 const router = useRouter()
 
 const logout = () => {
-  firebase
+  firebaseApp
     .auth()
     .signOut()
     .then(

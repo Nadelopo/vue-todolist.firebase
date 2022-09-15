@@ -72,7 +72,7 @@ import { storeToRefs } from 'pinia'
 import { onClickOutside } from '@vueuse/core'
 import Swal from 'sweetalert2'
 import TaskBlock from '@/components/Home/TaskBlock.vue'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 const { userId, user } = storeToRefs(useLoadUsers())
 

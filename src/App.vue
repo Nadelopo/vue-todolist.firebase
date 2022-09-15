@@ -5,7 +5,7 @@
 
 <script setup>
 import { watch, ref, provide } from 'vue'
-import Header from '@/components/Header'
+import Header from '@/components/Header.vue'
 
 const theme = ref(localStorage.getItem('theme') || 'dark')
 
@@ -27,9 +27,9 @@ provide('setOpen', setOpen)
 </script>
 
 <style lang="sass">
-@tailwind base
-@tailwind components
-@tailwind utilities
+@import "tailwindcss/base"
+@import "tailwindcss/components"
+@import "tailwindcss/utilities"
 
 *
   box-sizing: border-box
@@ -37,6 +37,12 @@ provide('setOpen', setOpen)
   transition: background-color 200ms linear
 
 :root
+  --shadow: rgba(0, 0, 0, 0.1)
+  --color-main: #26a69a
+  --color-sec: #2bbbad
+  --back-main: #1c1c1c
+  --back-sec: #333333
+  --color-text: #61BEB5
 
 body
   background: var(--back-main)
