@@ -14,11 +14,11 @@ defineProps({
   },
   change: {
     type: Function as PropType<(task: Ttask) => void>,
-    required: true,
+    default: () => null,
   },
   item: {
     type: Object as PropType<Ttask>,
-    required: true,
+    default: {},
   },
 })
 

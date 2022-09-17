@@ -4,7 +4,6 @@ module.exports = {
     node: true,
     es2021: true,
   },
-  module: true,
   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
   rules: {
     'vue/no-unused-vars': 'error',
@@ -18,4 +17,6 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/no-setup-props-destructure': 'off',
   },
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
 }

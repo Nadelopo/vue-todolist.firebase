@@ -1,10 +1,4 @@
-<template>
-  <div class="accordion__daskk231fas2" :class="{ active: visible }">
-    <slot></slot>
-  </div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { computed, onMounted, nextTick } from 'vue'
 
 onMounted(async () => {
@@ -40,6 +34,12 @@ const calcHeigth = computed(() => {
   return { heightFull, paddingTop, paddingBottom }
 })
 </script>
+
+<template>
+  <div class="accordion__daskk231fas2" :class="{ active: visible }">
+    <slot></slot>
+  </div>
+</template>
 
 <style lang="sass">
 

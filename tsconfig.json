@@ -16,5 +16,5 @@
       "@/*": ["./src/*"]
     },
   },
-  "include": ["./src/**/*.ts","./src/**/*.js", "./src/**/*.d.ts", "./src/**/*.tsx", "./src/**/*.vue", ".eslintrc.js", ".eslintrc.cjs"],
+  "include": ["./src/**/*.ts","./src/**/*.js", "./src/**/*.d.ts", "./src/**/*.tsx", "./src/**/*.vue", ".eslintrc.cjs", ".eslintrc.js"],
 }
