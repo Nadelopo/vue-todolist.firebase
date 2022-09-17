@@ -1,3 +1,5 @@
+import type { Ref } from 'vue'
+
 export type Ttask = {
   category: number
   date: {
@@ -8,3 +10,8 @@ export type Ttask = {
   status: boolean
   title: string
 }
+
+export type TCategory = Ref<{
+  id: number | null
+  title: string
+}>

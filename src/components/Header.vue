@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import Settings from '@/components/Settings.vue'
 import { ref, inject } from 'vue'
-import { firebaseApp } from '@/firebase.js'
+import { firebaseApp } from '@/firebase'
 import { setOpenKey } from '../symbols'
 
 const router = useRouter()

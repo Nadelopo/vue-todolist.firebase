@@ -1,3 +1,58 @@
+<script setup lang="ts">
+import { ref, inject } from 'vue'
+import { updateTask } from '@/firebase'
+import { useLoadUsers } from '@/store/Users'
+import { storeToRefs } from 'pinia'
+import { onClickOutside } from '@vueuse/core'
+import Swal from 'sweetalert2'
+import TaskBlock from '@/components/Home/TaskBlock.vue'
+import firebase from 'firebase/app'
+import { setOpenKey, openKey } from '@/symbols'
+import { Ttask, TCategory } from '@/types/tasks'
+
+const { userId, user } = storeToRefs(useLoadUsers())
+
+const open = inject(openKey)
+const setOpen = inject(setOpenKey, () => null)
+
+const list = ref('')
+const currentCategory: TCategory = ref({
+  id: null,
+  title: '',
+})
+const fromWarning = ref(false)
+const addTask = async () => {
+  if (!currentCategory.value || !list.value) {
+    fromWarning.value = true
+    Swal.fire('Заполните поля', '', 'warning')
+    setTimeout(() => (fromWarning.value = false), 2000)
+  } else if (currentCategory.value.id) {
+    const tasks: Ttask[] = [...user.value.tasks]
+    tasks.push({
+      id: user.value.tasks.length,
+      category: currentCategory.value.id,
+      title: list.value,
+      status: false,
+      date: firebase.firestore.Timestamp.now(),
+    })
+    updateTask(userId.value, tasks)
+    user.value.tasks = tasks
+    list.value = ''
+  }
+}
+
+const activeSelect = ref(false)
+const wrapRef = ref(null)
+
+const openSelect = () => {
+  activeSelect.value = !activeSelect.value
+}
+
+onClickOutside(wrapRef, () => {
+  activeSelect.value = false
+})
+</script>
+
 <template>
   <div class="container">
     <div class="mb-4 mx-auto">
@@ -63,57 +118,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, inject } from 'vue'
-import { updateTask } from '@/firebase'
-import { useLoadUsers } from '@/store/Users'
-import { storeToRefs } from 'pinia'
-import { onClickOutside } from '@vueuse/core'
-import Swal from 'sweetalert2'
-import TaskBlock from '@/components/Home/TaskBlock.vue'
-import firebase from 'firebase/app'
-import { setOpenKey, openKey } from '@/symbols'
-
-const { userId, user } = storeToRefs(useLoadUsers())
-
-const open = inject(openKey)
-const setOpen = inject(setOpenKey)
-const list = ref('')
-const currentCategory = ref('')
-const fromWarning = ref(false)
-const addTask = async () => {
-  if (!currentCategory.value || !list.value) {
-    fromWarning.value = true
-    Swal.fire('Заполните поля', '', 'warning')
-    setTimeout(() => (fromWarning.value = false), 2000)
-  } else {
-    const tasks = [...user.value.tasks]
-    tasks.push({
-      id: user.value.tasks.length,
-      category: currentCategory.value.id,
-      title: list.value,
-      status: false,
-      date: firebase.firestore.Timestamp.now(),
-    })
-    updateTask(userId.value, tasks)
-    user.value.tasks = tasks
-    currentCategory.value = ''
-    list.value = ''
-  }
-}
-
-const activeSelect = ref(false)
-const wrapRef = ref(null)
-
-const openSelect = () => {
-  activeSelect.value = !activeSelect.value
-}
-
-onClickOutside(wrapRef, () => {
-  activeSelect.value = false
-})
-</script>
 
 <style scoped lang="sass">
 
