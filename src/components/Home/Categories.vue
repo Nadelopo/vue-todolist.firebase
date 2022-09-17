@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { useLoadUsers } from '@/store/Users'
+import { categoryStore } from '@/store/Category'
+import { storeToRefs } from 'pinia'
+
+const { user } = storeToRefs(useLoadUsers())
+const { currentCategory } = storeToRefs(categoryStore())
+</script>
+
 <template>
   <div class="container">
     <div class="flex justify-center">
@@ -28,15 +37,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { useLoadUsers } from '@/store/Users'
-import { categoryStore } from '@/store/Category'
-import { storeToRefs } from 'pinia'
-
-const { user } = storeToRefs(useLoadUsers())
-const { currentCategory } = storeToRefs(categoryStore())
-</script>
 
 <style scoped lang="sass">
 

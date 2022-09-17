@@ -16,7 +16,14 @@ module.exports = {
     'vue/require-prop-types': 'off',
     'vue/require-default-prop': 'off',
     'vue/no-setup-props-destructure': 'off',
+    'no-unused-vars': 'off',
   },
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  parserOptions: {
+    parser: require.resolve('@typescript-eslint/parser'),
+    extraFileExtensions: ['.vue'],
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  plugins: ['@typescript-eslint/eslint-plugin'],
 }

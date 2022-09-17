@@ -18,7 +18,7 @@ defineProps({
   },
   item: {
     type: Object as PropType<Ttask>,
-    default: {},
+    default: null,
   },
 })
 
