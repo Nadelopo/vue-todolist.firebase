@@ -18,7 +18,7 @@ const logout = () => {
         router.push({ name: 'Auth' })
         Swal.fire('Вы вышли с аккаунта', '', 'success')
       },
-      (err) => {
+      (err: Error) => {
         console.log(err)
       }
     )
@@ -27,12 +27,14 @@ const logout = () => {
 const setOpen = inject(setOpenKey)
 
 const openSettings = ref(false)
-const openSettingsHandler = () => {
+const openSettingsHandler = (): void => {
   openSettings.value = true
   setOpen(false)
 }
 
-const setOpenSettings = () => (openSettings.value = false)
+const setOpenSettings = (): void => {
+  openSettings.value = false
+}
 </script>
 
 <template>

@@ -19,30 +19,3 @@ module.exports = {
     'vue/no-setup-props-destructure': 'off',
   },
 }
-
-// module.exports = {
-//   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
-//   rules: {
-//     'vue/no-unused-vars': 'error',
-//   },
-// }
-
-// module.exports = {
-//   root: true,
-//   env: {
-//     node: true,
-//     'vue/setup-compiler-macros': true,
-//   },
-//   extends: [
-//     'plugin:vue/vue3-essential',
-//     'eslint:recommended',
-//     'plugin:vue/base',
-//   ],
-//   parserOptions: {
-//     parser: '@babel/eslint-parser',
-//   },
-//   rules: {
-//     'vue/multi-word-component-names': 'off',
-//     'vue/no-unused-vars': 'error',
-//   },
-// }

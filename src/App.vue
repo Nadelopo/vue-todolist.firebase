@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { watch, ref, provide } from 'vue'
 import Header from '@/components/Header.vue'
-import { openKey, setOpenKey } from './symbols'
+import { openKey, setOpenKey, setThemeKey } from './symbols'
 
+// theme
 const theme = ref(localStorage.getItem('theme') || 'dark')
-
 const setTheme = (value: string) => (theme.value = value)
 document.documentElement.setAttribute('data-theme', theme.value)
-provide('setTheme', setTheme)
+provide(setThemeKey, setTheme)
+
 watch(
   () => theme.value,
   (current) => {
@@ -16,6 +17,7 @@ watch(
   }
 )
 
+//createtask
 const open = ref(false)
 provide(openKey, open)
 

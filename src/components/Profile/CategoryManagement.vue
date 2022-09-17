@@ -1,35 +1,4 @@
-<template>
-  <div>
-    <div class="font-medium text-lg mb-4">Управление категориями</div>
-    <div class="wrapper">
-      <div class="flex flex-col gap-y-4" v-if="isLoad">
-        <div
-          v-for="(category, index) in user.category"
-          :key="category.id"
-          class="category"
-        >
-          <input
-            type="text"
-            ref="inputsRef"
-            class="shadow__none"
-            v-model="changeCategories[index].title"
-          />
-          <Popup :deleteHandler="deleteCategory" :id="category.id" />
-        </div>
-      </div>
-      <div v-if="openInput">
-        <input type="text" class="mt-6" v-model="newCategory" />
-      </div>
-
-      <button class="mbtn mt-6" @click="openInput = true">
-        добавить категорию
-      </button>
-      <button class="mbtn mt-6" @click="editCategory">сохранить</button>
-    </div>
-  </div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { useLoadUsers } from '@/store/Users'
 import { ref, watch, nextTick } from 'vue'
 import Popup from '../UI/Popup.vue'
@@ -52,11 +21,13 @@ const isLoad = ref(false)
 })()
 
 //
-const inputsRef = ref([])
-watch(isLoad, async () => {
-  await nextTick()
-  inputsRef.value[0].focus()
-})
+const inputsRef = ref<HTMLInputElement[]>([])
+watch(
+  () => inputsRef.value,
+  () => {
+    inputsRef.value[0].focus()
+  }
+)
 
 //
 const openInput = ref(false)
@@ -94,6 +65,37 @@ const deleteCategory = async (categoryId) => {
   changeCategories.value = user.value.category
 }
 </script>
+
+<template>
+  <div>
+    <div class="font-medium text-lg mb-4">Управление категориями</div>
+    <div class="wrapper">
+      <div class="flex flex-col gap-y-4" v-if="isLoad">
+        <div
+          v-for="(category, index) in user.category"
+          :key="category.id"
+          class="category"
+        >
+          <input
+            type="text"
+            ref="inputsRef"
+            class="shadow__none"
+            v-model="changeCategories[index].title"
+          />
+          <Popup :deleteHandler="deleteCategory" :id="category.id" />
+        </div>
+      </div>
+      <div v-if="openInput">
+        <input type="text" class="mt-6" v-model="newCategory" />
+      </div>
+
+      <button class="mbtn mt-6" @click="openInput = true">
+        добавить категорию
+      </button>
+      <button class="mbtn mt-6" @click="editCategory">сохранить</button>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="sass">
 

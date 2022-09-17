@@ -1,47 +1,4 @@
-<template>
-  <div class="main">
-    <div class="login__wrapper">
-      <div class="flex justify-between">
-        <div>
-          <button class="mbtn mb-6" @click="change = true">войти</button>
-        </div>
-        <div>
-          <button class="mbtn" @click="change = false">
-            зарегестрироваться
-          </button>
-        </div>
-      </div>
-      <form @submit.prevent="choiceAuth">
-        <div class="mb-4">
-          <input
-            type="email"
-            class=""
-            ref="loginRef"
-            placeholder="почта"
-            v-model="email"
-            required
-          />
-        </div>
-        <div class="mb-6">
-          <input
-            type="password"
-            class=""
-            placeholder="пароль"
-            v-model="password"
-            required
-          />
-        </div>
-        <div>
-          <button class="mbtn">
-            {{ change ? 'войти' : 'зарегестрироваться' }}
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import firebase from 'firebase/app'
 import Swal from 'sweetalert2'
@@ -100,6 +57,49 @@ const login = () => {
 const loginRef = ref(null)
 onMounted(() => loginRef.value.focus())
 </script>
+
+<template>
+  <div class="main">
+    <div class="login__wrapper">
+      <div class="flex justify-between">
+        <div>
+          <button class="mbtn mb-6" @click="change = true">войти</button>
+        </div>
+        <div>
+          <button class="mbtn" @click="change = false">
+            зарегестрироваться
+          </button>
+        </div>
+      </div>
+      <form @submit.prevent="choiceAuth">
+        <div class="mb-4">
+          <input
+            type="email"
+            class=""
+            ref="loginRef"
+            placeholder="почта"
+            v-model="email"
+            required
+          />
+        </div>
+        <div class="mb-6">
+          <input
+            type="password"
+            class=""
+            placeholder="пароль"
+            v-model="password"
+            required
+          />
+        </div>
+        <div>
+          <button class="mbtn">
+            {{ change ? 'войти' : 'зарегестрироваться' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="sass">
 

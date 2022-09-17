@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useLoadUsers } from '@/store/Users'
+import { storeToRefs } from 'pinia'
+
+const { user } = storeToRefs(useLoadUsers())
+
+const completedTasks = computed(
+  () => user.value?.tasks.filter((t: any) => t.status).length
+)
+
+const notCompleted = computed(
+  () => user.value?.tasks.filter((t: any) => !t.status).length
+)
+</script>
+
 <template>
   <div>
     <div class="font-medium text-lg mb-4">Обзор задач</div>
@@ -13,22 +29,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { computed } from 'vue'
-import { useLoadUsers } from '@/store/Users'
-import { storeToRefs } from 'pinia'
-
-const { user } = storeToRefs(useLoadUsers())
-
-const completedTasks = computed(
-  () => user.value?.tasks.filter((t) => t.status).length
-)
-
-const notCompleted = computed(
-  () => user.value?.tasks.filter((t) => !t.status).length
-)
-</script>
 
 <style scoped lang="sass">
 

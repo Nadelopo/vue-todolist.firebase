@@ -1,3 +1,75 @@
+<script setup lang="ts">
+import { useLoadUsers } from '@/store/Users'
+import { storeToRefs } from 'pinia'
+import { computed, ref } from 'vue'
+import { categoryStore } from '@/store/Category'
+import { updateTask, getUser } from '@/firebase'
+import Popup from '../UI/Popup.vue'
+import { Ttask } from '@/types/tasks'
+
+const { user, userId } = storeToRefs(useLoadUsers())
+const { currentCategory } = storeToRefs(categoryStore())
+
+const filterTasks = computed(() => {
+  const filter = [...user.value.tasks].filter(
+    (t) =>
+      t.category == (currentCategory.value ? currentCategory.value : t.category)
+  )
+  const sortByDate = filter
+    .sort((a, b) => a.date.seconds - b.date.seconds)
+    .reverse()
+  return sortByDate
+})
+
+const edit = async (task: Ttask) => {
+  const editTasks = [...user.value.tasks].map((t) =>
+    t.id === task.id ? { ...task, status: !task.status } : t
+  )
+  updateTask(userId.value, editTasks)
+  user.value.tasks = editTasks
+}
+
+const deleteTask = async (taskId: number): Promise<void> => {
+  updateTask(
+    userId.value,
+    user.value.tasks.filter((e: Ttask) => e.id != taskId)
+  )
+  user.value.tasks = user.value.tasks.filter((e: Ttask) => e.id != taskId)
+}
+
+const visibleInput = ref(false)
+const currentChangedTask = ref<Ttask>({
+  category: 0,
+  date: {
+    seconds: 0,
+    nanoseconds: 0,
+  },
+  id: 1,
+  status: true,
+  title: '',
+})
+
+const change = (task: Ttask): void => {
+  currentChangedTask.value = { ...task }
+  visibleInput.value = true
+}
+
+const saveChanges = async () => {
+  updateTask(
+    userId.value,
+    user.value.tasks.map((e: Ttask) =>
+      e.id === currentChangedTask.value.id ? { ...currentChangedTask.value } : e
+    )
+  )
+  visibleInput.value = false
+  user.value = await getUser(userId.value)
+}
+
+const calculate = (date: string): void => {
+  date.split('.').slice(0, -1).join('.')
+}
+</script>
+
 <template>
   <div>
     <div class="wrapper" v-if="user">
@@ -43,66 +115,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { useLoadUsers } from '@/store/Users'
-import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
-import { categoryStore } from '@/store/Category'
-import { updateTask, getUser } from '@/firebase'
-import Popup from '../UI/Popup.vue'
-
-const { user, userId } = storeToRefs(useLoadUsers())
-const { currentCategory } = storeToRefs(categoryStore())
-
-const filterTasks = computed(() => {
-  const filter = [...user.value.tasks].filter(
-    (t) =>
-      t.category == (currentCategory.value ? currentCategory.value : t.category)
-  )
-  const sortByDate = filter
-    .sort((a, b) => a.date.seconds - b.date.seconds)
-    .reverse()
-  return sortByDate
-})
-
-const edit = async (task) => {
-  const editTasks = [...user.value.tasks].map((t) =>
-    t.id === task.id ? { ...task, status: !task.status } : t
-  )
-  updateTask(userId.value, editTasks)
-  user.value.tasks = editTasks
-}
-
-const deleteTask = async (taskId) => {
-  updateTask(
-    userId.value,
-    user.value.tasks.filter((e) => e.id != taskId)
-  )
-  user.value.tasks = user.value.tasks.filter((e) => e.id != taskId)
-}
-
-const visibleInput = ref(false)
-const currentChangedTask = ref()
-
-const change = (task) => {
-  currentChangedTask.value = { ...task }
-  visibleInput.value = true
-}
-
-const saveChanges = async () => {
-  updateTask(
-    userId.value,
-    user.value.tasks.map((e) =>
-      e.id === currentChangedTask.value.id ? { ...currentChangedTask.value } : e
-    )
-  )
-  visibleInput.value = false
-  user.value = await getUser(userId.value)
-}
-
-const calculate = (date) => date.split('.').slice(0, -1).join('.')
-</script>
 
 <style scoped lang="sass">
 

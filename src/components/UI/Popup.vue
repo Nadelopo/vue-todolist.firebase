@@ -1,3 +1,33 @@
+<script setup lang="ts">
+import { PropType, ref } from 'vue'
+import { onClickOutside } from '@vueuse/core'
+import { Ttask } from '@/types/tasks'
+
+defineProps({
+  deleteHandler: {
+    type: Function as PropType<(id: number) => Promise<void>>,
+    required: true,
+  },
+  id: {
+    type: Number,
+    required: true,
+  },
+  change: {
+    type: Function as PropType<(task: Ttask) => void>,
+    required: true,
+  },
+  item: {
+    type: Object as PropType<Ttask>,
+    required: true,
+  },
+})
+
+const isOpen = ref(false)
+const popupRef = ref(null)
+
+onClickOutside(popupRef, () => (isOpen.value = false))
+</script>
+
 <template>
   <div class="flex flex-column relative">
     <div class="popup" :class="{ active: isOpen }">
@@ -17,18 +47,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { onClickOutside } from '@vueuse/core'
-
-const isOpen = ref(false)
-const popupRef = ref(null)
-
-defineProps(['deleteHandler', 'id', 'change', 'item'])
-
-onClickOutside(popupRef, () => (isOpen.value = false))
-</script>
 
 <style scoped lang="sass">
 .popup
