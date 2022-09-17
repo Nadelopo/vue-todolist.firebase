@@ -1,3 +1,40 @@
+<script setup lang="ts">
+import 'firebase/auth'
+import Swal from 'sweetalert2'
+import { useRouter } from 'vue-router'
+import Settings from '@/components/Settings.vue'
+import { ref, inject } from 'vue'
+import { firebaseApp } from '@/firebase.js'
+import { setOpenKey } from '../symbols'
+
+const router = useRouter()
+
+const logout = () => {
+  firebaseApp
+    .auth()
+    .signOut()
+    .then(
+      () => {
+        router.push({ name: 'Auth' })
+        Swal.fire('Вы вышли с аккаунта', '', 'success')
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
+}
+
+const setOpen = inject(setOpenKey)
+
+const openSettings = ref(false)
+const openSettingsHandler = () => {
+  openSettings.value = true
+  setOpen(false)
+}
+
+const setOpenSettings = () => (openSettings.value = false)
+</script>
+
 <template>
   <div class="mb-8 pt-10" v-if="$route.name !== 'Auth'">
     <div class="container">
@@ -29,45 +66,9 @@
     </div>
   </div>
   <transition name="settings">
-    <Settings v-if="openSettings" :setOpenSettings="setOpenSettings" />
+    <Settings v-if="openSettings" :set-open-settings="setOpenSettings" />
   </transition>
 </template>
-
-<script setup>
-import 'firebase/auth'
-import Swal from 'sweetalert2'
-import { useRouter } from 'vue-router'
-import Settings from '@/components/Settings.vue'
-import { ref, inject } from 'vue'
-import { firebaseApp } from '@/firebase'
-
-const router = useRouter()
-
-const logout = () => {
-  firebaseApp
-    .auth()
-    .signOut()
-    .then(
-      () => {
-        router.push({ name: 'Auth' })
-        Swal.fire('Вы вышли с аккаунта', '', 'success')
-      },
-      (err) => {
-        console.log(err)
-      }
-    )
-}
-
-const setOpen = inject('setOpen')
-
-const openSettings = ref(false)
-const openSettingsHandler = () => {
-  openSettings.value = true
-  setOpen(false)
-}
-
-const setOpenSettings = () => (openSettings.value = false)
-</script>
 
 <style scoped lang="sass">
 .theme, .settings

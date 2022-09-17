@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import path from 'path'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
+import checker from 'vite-plugin-checker'
 
 const pwaOptions = {
   mode: 'development',
@@ -33,7 +34,15 @@ const pwaOptions = {
 }
 
 export default defineConfig({
-  plugins: [vue(), VitePWA(pwaOptions)],
+  plugins: [
+    vue(),
+    VitePWA(pwaOptions),
+    checker({
+      eslint: {
+        lintCommand: 'eslint "./src/**/*.{js,vue}"',
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

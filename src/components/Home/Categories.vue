@@ -20,8 +20,9 @@
             class="cbtn"
             :class="{ active: category.id == currentCategory }"
             :to="{ query: { category: category.id } }"
-            >{{ category.title }}</router-link
           >
+            {{ category.title }}
+          </router-link>
         </div>
       </div>
     </div>

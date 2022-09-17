@@ -1,15 +1,11 @@
-<template>
-  <Header />
-  <router-view />
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { watch, ref, provide } from 'vue'
 import Header from '@/components/Header.vue'
+import { openKey, setOpenKey } from './symbols'
 
 const theme = ref(localStorage.getItem('theme') || 'dark')
 
-const setTheme = (value) => (theme.value = value)
+const setTheme = (value: string) => (theme.value = value)
 document.documentElement.setAttribute('data-theme', theme.value)
 provide('setTheme', setTheme)
 watch(
@@ -21,10 +17,16 @@ watch(
 )
 
 const open = ref(false)
-const setOpen = (value) => (open.value = value)
-provide('open', open)
-provide('setOpen', setOpen)
+provide(openKey, open)
+
+const setOpen = (value: boolean) => (open.value = value)
+provide(setOpenKey, setOpen)
 </script>
+
+<template>
+  <Header />
+  <router-view />
+</template>
 
 <style lang="sass">
 @import "tailwindcss/base"

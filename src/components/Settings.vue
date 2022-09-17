@@ -45,7 +45,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, inject } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import Accordion from './UI/Accordion.vue'
@@ -53,7 +53,7 @@ import Accordion from './UI/Accordion.vue'
 const props = defineProps(['setOpenSettings'])
 
 const visible = ref(false)
-const setTheme = inject('setTheme')
+const setTheme = inject<(theme: string) => void>('setTheme')
 
 const contentRef = ref(null)
 onClickOutside(contentRef, () => props.setOpenSettings())

@@ -64,7 +64,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, inject } from 'vue'
 import { updateTask } from '@/firebase'
 import { useLoadUsers } from '@/store/Users'
@@ -73,11 +73,12 @@ import { onClickOutside } from '@vueuse/core'
 import Swal from 'sweetalert2'
 import TaskBlock from '@/components/Home/TaskBlock.vue'
 import firebase from 'firebase/app'
+import { setOpenKey, openKey } from '@/symbols'
 
 const { userId, user } = storeToRefs(useLoadUsers())
 
-const open = inject('open')
-const setOpen = inject('setOpen')
+const open = inject(openKey)
+const setOpen = inject(setOpenKey)
 const list = ref('')
 const currentCategory = ref('')
 const fromWarning = ref(false)
@@ -104,18 +105,12 @@ const addTask = async () => {
 
 const activeSelect = ref(false)
 const wrapRef = ref(null)
+
 const openSelect = () => {
-  if (wrapRef.value.classList.contains('active')) {
-    wrapRef.value.classList.remove('active')
-    activeSelect.value = false
-  } else {
-    wrapRef.value.classList.add('active')
-    activeSelect.value = true
-  }
+  activeSelect.value = !activeSelect.value
 }
 
 onClickOutside(wrapRef, () => {
-  wrapRef.value.classList.remove('active')
   activeSelect.value = false
 })
 </script>
