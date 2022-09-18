@@ -15,7 +15,7 @@ const contentRef = ref(null)
 onClickOutside(contentRef, () => props.setOpenSettings())
 
 const visible = ref(false)
-const setTheme = inject(setThemeKey)
+const setTheme = inject(setThemeKey, () => null)
 </script>
 
 <template>
@@ -46,12 +46,7 @@ const setTheme = inject(setThemeKey)
             <div class="cursor-pointer" @click="visible = !visible">
               сменить тему
             </div>
-            <Accordion
-              :visible="visible"
-              :heightContent="27"
-              :paddingTop="5"
-              :paddingBottom="5"
-            >
+            <Accordion :visible="visible">
               <div @click="setTheme('dark')" class="li">темная</div>
               <div @click="setTheme('light')" class="li">светлая</div>
               <div @click="setTheme('turquoise')" class="li">бирюзовый</div>

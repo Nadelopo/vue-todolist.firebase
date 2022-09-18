@@ -1,18 +1,24 @@
-<template>
-  <div class="accordion__daskk231fas2" :class="{ active: visible }">
-    <slot></slot>
-  </div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps([
-  'visible',
-  'heightContent',
-  'paddingTop',
-  'paddingBottom',
-])
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    required: true,
+  },
+  heightContent: {
+    type: Number,
+    default: 27,
+  },
+  paddingTop: {
+    type: Number,
+    default: 5,
+  },
+  paddingBottom: {
+    type: Number,
+    default: 5,
+  },
+})
 
 const calcHeigth = computed(() => {
   let paddingTop = '0px'
@@ -27,6 +33,12 @@ const calcHeigth = computed(() => {
   return { heightFUll, paddingTop, paddingBottom }
 })
 </script>
+
+<template>
+  <div class="accordion__daskk231fas2" :class="{ active: visible }">
+    <slot></slot>
+  </div>
+</template>
 
 <style lang="sass">
 

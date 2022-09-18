@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import firebase from 'firebase/app'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
+//@ts-ignore
 import { db } from '@/firebase'
 
 const email = ref('')
@@ -17,7 +18,7 @@ const reg = () => {
     .auth()
     .createUserWithEmailAndPassword(email.value, password.value)
     .then((user) => {
-      db.collection('users').doc(user?.user.uid).set({
+      db.collection('users').doc(user?.user?.uid).set({
         totalTasskFinished: 0,
         totalTasks: 0,
         avgTimeCosts: 0,
@@ -54,8 +55,8 @@ const login = () => {
   console.log('success')
 }
 
-const loginRef = ref(null)
-onMounted(() => loginRef.value.focus())
+const loginRef = ref<HTMLInputElement>()
+onMounted(() => loginRef.value?.focus())
 </script>
 
 <template>

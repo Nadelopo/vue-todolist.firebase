@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, ref } from 'vue'
+import { PropType, ref, watch } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { Ttask } from '@/types/tasks'
 
@@ -23,13 +23,22 @@ defineProps({
 })
 
 const isOpen = ref(false)
-const popupRef = ref(null)
+const popupRef = ref<HTMLDivElement>()
 
 onClickOutside(popupRef, () => (isOpen.value = false))
+
+const changePossition = ref(false)
+
+watch(isOpen, () => {
+  if (isOpen.value) changePossition.value = true
+  setTimeout(() => {
+    if (!isOpen.value) changePossition.value = false
+  }, 200)
+})
 </script>
 
 <template>
-  <div class="flex flex-column relative">
+  <div class="flex flex-column" :class="{ relative: changePossition }">
     <div class="popup" :class="{ active: isOpen }">
       <button class="cbtn" @click="deleteHandler(id)">удалить</button>
       <button class="cbtn" @click="change(item)" v-if="change">изменить</button>

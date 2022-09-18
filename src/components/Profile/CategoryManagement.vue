@@ -1,15 +1,18 @@
 <script setup lang="ts">
+//@ts-ignore
 import { useLoadUsers } from '@/store/Users'
 import { ref, watch, nextTick } from 'vue'
 import Popup from '../UI/Popup.vue'
+//@ts-ignore
 import { updateCategory, getUser } from '@/firebase'
 import Swal from 'sweetalert2'
+import { TCategory } from '@/types/tasks'
 
 const { getCurrentUserId, updateUserData } = useLoadUsers()
 
 const userId = ref('')
 const user = ref()
-const changeCategories = ref(user.value?.category || [])
+const changeCategories = ref<TCategory[]>(user.value?.category || [])
 
 //
 const isLoad = ref(false)
@@ -56,7 +59,7 @@ const editCategory = async () => {
 }
 
 //
-const deleteCategory = async (categoryId) => {
+const deleteCategory = async (categoryId: number) => {
   updateCategory(
     userId.value,
     changeCategories.value.filter((e) => e.id != categoryId)
@@ -82,7 +85,7 @@ const deleteCategory = async (categoryId) => {
             class="shadow__none"
             v-model="changeCategories[index].title"
           />
-          <Popup :deleteHandler="deleteCategory" :id="category.id" />
+          <Popup :delete-handler="deleteCategory" :id="category.id" />
         </div>
       </div>
       <div v-if="openInput">

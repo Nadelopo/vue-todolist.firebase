@@ -11,7 +11,7 @@ export type Ttask = {
   title: string
 }
 
-export type TCategory = Ref<{
+export type TCategory = {
   id: number | null
   title: string
-}>
+}

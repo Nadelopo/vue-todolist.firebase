@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import Settings from '@/components/Settings.vue'
 import { ref, inject } from 'vue'
+//@ts-ignore
 import { firebaseApp } from '@/firebase'
 import { setOpenKey } from '../symbols'
 
@@ -24,7 +25,7 @@ const logout = () => {
     )
 }
 
-const setOpen = inject(setOpenKey)
+const setOpen = inject(setOpenKey, () => null)
 
 const openSettings = ref(false)
 const openSettingsHandler = (): void => {

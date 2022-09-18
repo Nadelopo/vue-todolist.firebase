@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue'
+//@ts-ignore
 import { updateTask } from '@/firebase'
+//@ts-ignore
 import { useLoadUsers } from '@/store/Users'
 import { storeToRefs } from 'pinia'
 import { onClickOutside } from '@vueuse/core'
@@ -16,12 +18,12 @@ const open = inject(openKey)
 const setOpen = inject(setOpenKey, () => null)
 
 const list = ref('')
-const currentCategory: TCategory = ref({
+const currentCategory = ref<TCategory>({
   id: null,
   title: '',
 })
 const fromWarning = ref(false)
-const addTask = async () => {
+const addTask = async (): Promise<void> => {
   if (!currentCategory.value || !list.value) {
     fromWarning.value = true
     Swal.fire('Заполните поля', '', 'warning')

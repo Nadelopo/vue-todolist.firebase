@@ -20,7 +20,6 @@ specifiers:
   vite-plugin-checker: ^0.5.1
   vite-plugin-pwa: ^0.12.7
   vue: ^3.2.37
-  vue-eslint-parser: ^9.1.0
   vue-router: ^4.1.5
 
 dependencies:
@@ -30,7 +29,6 @@ dependencies:
   pinia: 2.0.22_arz4dztosvwy2ghjrlh2wdhejm
   sweetalert2: 11.4.33
   vue: 3.2.39
-  vue-eslint-parser: 9.1.0_eslint@8.23.1
   vue-router: 4.1.5_vue@3.2.39
 
 devDependencies:
@@ -5656,6 +5654,7 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: true
 
   /log-symbols/4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -8078,6 +8077,7 @@ packages:
       semver: 7.3.7
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /vue-router/4.1.5_vue@3.2.39:
     resolution: {integrity: sha512-IsvoF5D2GQ/EGTs/Th4NQms9gd2NSqV+yylxIyp/OYp8xOwxmU8Kj/74E9DTSYAyH5LX7idVUngN3JSj1X4xcQ==}

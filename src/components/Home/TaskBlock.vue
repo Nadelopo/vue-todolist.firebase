@@ -100,7 +100,7 @@ const calculate = (date: string): void => {
               @click="edit(task)"
             ></div>
             <Popup
-              :deleteHandler="deleteTask"
+              :delete-handler="deleteTask"
               :id="task.id"
               :change="change"
               :item="task"
