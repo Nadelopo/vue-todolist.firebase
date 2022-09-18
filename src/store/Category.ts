@@ -14,11 +14,6 @@ export const categoryStore = defineStore('category', {
       },
       { deep: true }
     )
-    // watchEffect(() => {
-    //   console.log(2)
-    //   currentCategory.value = route.query.category
-    // })
-
     return { currentCategory }
   },
 })

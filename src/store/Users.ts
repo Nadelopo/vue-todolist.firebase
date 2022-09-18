@@ -21,10 +21,12 @@ export const useLoadUsers = defineStore('users', {
   },
   actions: {
     async getCurrentUserId() {
+      //@ts-ignore
       const user = await firebase.getCurrentUser()
       return user.uid
     },
     async updateUserData() {
+      //@ts-ignores
       this.user = await getUser((await firebase.getCurrentUser()).uid)
     },
   },

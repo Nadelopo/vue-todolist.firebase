@@ -33,6 +33,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const requireAuth = to.matched.some((record) => !record.meta.auth)
+  //@ts-ignore
   if (requireAuth && !(await firebase.getCurrentUser())) {
     next('/auth')
   } else {

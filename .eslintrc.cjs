@@ -17,6 +17,7 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/no-setup-props-destructure': 'off',
     'no-unused-vars': 'off',
+    'no-unsafe-optional-chaining': 'off',
   },
   parserOptions: {
     parser: require.resolve('@typescript-eslint/parser'),

@@ -3,7 +3,6 @@ import { ref, onMounted } from 'vue'
 import firebase from 'firebase/app'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
-//@ts-ignore
 import { db } from '@/firebase'
 
 const email = ref('')

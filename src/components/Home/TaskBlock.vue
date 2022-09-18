@@ -22,7 +22,7 @@ const filterTasks = computed(() => {
 })
 
 const edit = async (task: Ttask) => {
-  const editTasks = [...user.value.tasks].map((t) =>
+  const editTasks: Ttask[] = [...user.value?.tasks].map((t) =>
     t.id === task.id ? { ...task, status: !task.status } : t
   )
   updateTask(userId.value, editTasks)

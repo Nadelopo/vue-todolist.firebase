@@ -1,9 +1,7 @@
 <script setup lang="ts">
-//@ts-ignore
 import { useLoadUsers } from '@/store/Users'
 import { ref, watch, nextTick } from 'vue'
 import Popup from '../UI/Popup.vue'
-//@ts-ignore
 import { updateCategory, getUser } from '@/firebase'
 import Swal from 'sweetalert2'
 import { TCategory } from '@/types/tasks'

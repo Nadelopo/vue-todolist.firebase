@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue'
-//@ts-ignore
 import { updateTask } from '@/firebase'
-//@ts-ignore
 import { useLoadUsers } from '@/store/Users'
 import { storeToRefs } from 'pinia'
 import { onClickOutside } from '@vueuse/core'
