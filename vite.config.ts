@@ -5,9 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import checker from 'vite-plugin-checker'
 
 const pwaOptions = {
-  mode: 'development',
   base: '/',
-  registerType: 'autoUpdate',
   manifest: {
     name: 'todolist',
     short_name: 'todolist',
