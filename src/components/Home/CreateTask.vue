@@ -26,7 +26,7 @@ const addTask = async (): Promise<void> => {
     fromWarning.value = true
     Swal.fire('Заполните поля', '', 'warning')
     setTimeout(() => (fromWarning.value = false), 2000)
-  } else if (currentCategory.value.id) {
+  } else if (currentCategory.value.id !== null) {
     const tasks: Ttask[] = [...user.value.tasks]
     tasks.push({
       id: user.value.tasks.length,

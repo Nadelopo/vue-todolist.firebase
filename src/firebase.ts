@@ -5,13 +5,13 @@ import { ref, onUnmounted } from 'vue'
 import { TCategory, Ttask } from './types/tasks'
 
 const config = {
-  apiKey: 'AIzaSyCc7NQEjl3GtdyYqq11Us0QQuiki4KkDUQ',
+  apiKey: 'AIzaSyDXEcmeruwzWBnoBO9OG5GyzjRIAfFYcgs',
   authDomain: 'todolist-da179.firebaseapp.com',
   projectId: 'todolist-da179',
   storageBucket: 'todolist-da179.appspot.com',
   messagingSenderId: '423116382110',
-  appId: '1:423116382110:web:85ab6dedd67941befd408f',
-  measurementId: 'G-ZD5TS1HVG9',
+  appId: '1:423116382110:web:aa47462beee44de3fd408f',
+  measurementId: 'G-20BRHWJQ5L',
 }
 //@ts-ignore
 firebase.getCurrentUser = () => {
